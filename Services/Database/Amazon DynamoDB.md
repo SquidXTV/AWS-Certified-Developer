@@ -68,7 +68,7 @@ will find no previous item.
 - contains (path, operand)
 - size (path)
 
-### [DynamoDB Time to Live (TTL)])(https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html)
+### [DynamoDB Time to Live (TTL)](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html)
 Time To Live (TTL) for DynamoDB is a cost-effective method for deleting items that are no longer relevant. TTL allows you to define a per-item expiration timestamp
 that indicates when an item is no longer needed. DynamoDB automatically deletes expired items within a few days of their expiration time, without consuming write throughput. 
 
