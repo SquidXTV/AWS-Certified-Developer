@@ -14,8 +14,8 @@ and deployment group are referenced during a deployment.
 
 A compute platform is a platform on which CodeDeploy deploys an application. There are three compute platforms:
 - EC2/On-Premises (with CodeDeploy Agent)
-- AWS Lambda
 - Amazon ECS
+- AWS Lambda
 
 
 ## [CodeDeploy Deployment Types](https://docs.aws.amazon.com/codedeploy/latest/userguide/deployments.html)
@@ -61,6 +61,47 @@ A blue/green deployment provisions the new application version alongside the old
 - LambdaCanary10Percent10Minutes
 - LambdaCanary10Percent15Minutes
 - LambdaCanary10Percent30Minutes
+
+
+
+## [CodeDeploy Hooks](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#reference-appspec-file-structure-hooks-list-ecs)
+
+Hooks let you customize what happens at each stage (lifecycle events) during the deployment process.
+
+### [CodeDeploy Hooks for an EC2/On-Premises Deployment](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-server)
+
+- ApplicationStop
+- DownloadBundle
+- BeforeInstall
+- Install
+- AfterInstall
+- ApplicationStart
+- ValidateService
+- BeforeBlockTraffic
+- BlockTraffic
+- AfterBlockTraffic
+- BeforeAllowTraffic
+- AllowTraffic
+- AfterAllowTraffic
+
+
+### [CodeDeploy Hooks for an ECS Deployment](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs)
+
+- BeforeInstall
+- Install
+- AfterInstall
+- AllowTestTraffic
+- AfterAllowTestTraffic
+- BeforeAllowTraffic
+- AllowTraffic
+- AfterAllowTraffic
+
+
+### [CodeDeploy Hooks for an AWS Lambda Deployment](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
+
+- BeforeAllowTraffic
+- AllowTraffic
+- AfterAllowTraffic
 
 
 
