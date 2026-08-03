@@ -13,10 +13,142 @@ Templates are either stored in an Amazon S3 bucket or referenced from a Git repo
 - **AWSTemplateFormatVersion:** set the template format version that the template conforms to
 - **Description:** description of the template
 - **Parameters:** input custom values each time running the template
-- **Mapping:** hardcoded key-value pairs for mapping values
+- **Mappings:** hardcoded key-value pairs for mapping values
 - **Resources:** required section to declare AWS resources that you want to create as part of your stack
 - **Outputs:** declare output values that can be imported into other stacks
 - **Conditions:** define conditions to apply to resources
+
+### [AWSTemplateFormatVersion](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html)
+
+The AWSTemplateFormatVersion section (optional) identifies the template format version that the template conforms to.
+The latest template format version is `2010-09-09` and is currently the only valid value.
+
+```json
+"AWSTemplateFormatVersion" : "2010-09-09"
+```
+
+
+### [Description](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-description-structure.html)
+
+The Description section (optional) enables you to include a text string that describes the template.
+This section must always follow the template format version section.
+
+```json
+"Description" : "Here are some details about the template."
+```
+
+
+### [Parameters](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html)
+
+Use the optional Parameters section to customize your templates. With parameters, you can input custom values to your
+template each time you create or update a stack. By using parameters in your templates, you can build reusable and
+flexible templates that can be tailored to specific scenarios. 
+
+```json
+"Parameters" : {
+  "ParameterLogicalID" : {
+    "Description": "Information about the parameter",
+    "Type" : "DataType",
+    "Default" : "value",
+    "AllowedValues" : ["value1", "value2"]
+  },
+  ...
+}
+```
+
+#### [Properties](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#parameters-section-structure-properties)
+
+- **AllowedPattern:** A regular expression that represents the patterns to allow for `String` or `CommaDelimitedList` types. Pattern needs to match entire `String` or each value in the `CommaDelimitedList`
+- **AllowedValues:** An array containing the list of values allowed for the parameter. A parameter of type `String` or each value in a `CommaDelimitedList` must exactly match one of the allowed values 
+- **ConstraintDescription:** A string that explains a constraint when the constraint is violated
+- **Default:** A value of the appropriate type for the template to use if no value is specified when a stack is created
+- **Description:** A string of up to 4000 characters that describes the parameter
+- **MaxLength:** An integer value that determines the largest number of characters you want to allow for `String` types
+- **MinLength:** An integer value that determines the smallest number of characters you want to allow for `String` types
+- **MaxValue:** A numeric value that determines the largest numeric value you want to allow for `Number` types
+- **MinValue:** A numeric value that determines the smallest numeric value you want to allow for `Number` types
+- **NoEcho:** Whether to mask the parameter value to prevent it from being displayed in the console, command line tools, or API
+- **Type:** The data type for the parameter supporting `String`, `Number`, `List<Number>`, `CommaDelimitedList`, AWS-specific parameter types (`AWS::EC2::VPC::Id`, ...), and Systems Manager parameter types (`AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>`, ...)
+
+
+
+### [Mappings](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/mappings-section-structure.html)
+
+The optional Mappings section helps you create key-value pairs that can be used to specify values based on certain conditions or dependencies. 
+
+```json
+"Mappings" : {
+  "MappingLogicalName" : {
+    "Key1" : {
+      "Name" : "Value1"
+    },
+    "Key2" : {
+      "Name" : "Value2"
+    },
+    "Key3" : {
+      "Name" : "Value3"
+    }
+  },
+  ...
+}
+```
+
+You can use the `Fn::FindInMap` function to return a named value based on a specified top level key and second level key such as:
+```json
+{ "Fn::FindInMap" : [ "MappingLogicalName", "Key1", "Name"] }
+```
+
+
+### [Resources](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html)
+
+The Resources section is a required top-level section in a CloudFormation template. It declares the AWS resources that you want CloudFormation
+to provision and configure as part of your stack.
+
+```json
+"Resources" : {
+    "LogicalResourceName1" : {
+        "Type" : "AWS::ServiceName::ResourceType",
+        "Properties" : {
+            "PropertyName1" : "PropertyValue1",
+            ...
+        }
+    },
+    ...
+}
+```
+
+### [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)
+
+The optional Outputs section declares output values for the stack. You can declare a maximum of 200 outputs in a template.
+
+```json
+"Outputs" : {
+  "OutputLogicalID" : {
+    "Description" : "Information about the value",
+    "Value" : "Value to return",
+    "Export" : {
+      "Name" : "Name of resource to export"
+    }
+  },
+  ...
+}
+```
+
+
+### [Conditions](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/conditions-section-structure.html)
+
+The optional Conditions section contains statements that can be later referenced as conditions for creating resources.
+
+```json
+"Conditions": {
+  "LogicalConditionName1": {
+    "Intrinsic function": ...[
+  },
+  "IsProduction" : { "Fn::Equals" : [{"Ref" : "Environment"}, "prod"] },
+  ...
+}
+```
+
 
 
 ## [Intrinsic Functions](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/intrinsic-function-reference.html)
