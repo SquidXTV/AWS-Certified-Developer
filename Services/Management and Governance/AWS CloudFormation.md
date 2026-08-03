@@ -56,6 +56,7 @@ flexible templates that can be tailored to specific scenarios.
 }
 ```
 
+
 #### [Properties](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#parameters-section-structure-properties)
 
 - **AllowedPattern:** A regular expression that represents the patterns to allow for `String` or `CommaDelimitedList` types. Pattern needs to match entire `String` or each value in the `CommaDelimitedList`
@@ -116,6 +117,7 @@ to provision and configure as part of your stack.
     ...
 }
 ```
+
 
 ### [Outputs](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html)
 
