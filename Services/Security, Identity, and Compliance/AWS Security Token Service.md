@@ -13,3 +13,11 @@ for a different IAM role.
 `GetSessionToken` lets an existing IAM user obtain temporary credentials for its own identity, often requiring MFA.
 Unlike `AssumeRole`, it doesn't change the principal, but wraps those permissions in a short-lived session that can
 be MFA-gated and time-bounded.
+
+
+## [Security Token Service DecodeAuthorizationMessage](https://docs.aws.amazon.com/STS/latest/APIReference/API_DecodeAuthorizationMessage.html)
+
+`DecodeAuthorizationMessage` decodes additional information about the authorization status of a request from an encoded message.
+The message is encoded because the details of the authorization status can contain privileged information that the user who requested
+the operation should not see. To decode an authorization status message, a user must be granted permissions through an IAM policy to
+request the DecodeAuthorizationMessage action.

@@ -1,5 +1,11 @@
 # [Amazon Simple Storage Service (S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 
+## [S3 Data Consistency Model](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html#ConsistencyModel)
+
+AWS S3 provides strong read-after-write consistency for `PUT` and `DELETE` operations. Updates to a single
+key are atomic operations.
+
+
 ## [S3 Encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html)
 
 
