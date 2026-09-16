@@ -55,6 +55,21 @@ Capacity Units are rounded up to the nearest whole number.
 - **BatchGetItem:** return up to 100 items from one or more tables, failed read operations get returned as a list of `UnprocessedKeys`
 
 
+## [DynamoDB Parallel Scans](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan)
+
+By default, the Scan operation processes data sequentially. Amazon DynamoDB returns data to the application in 1 MB increments,
+and an application performs additional Scan operations to retrieve the next 1 MB of data.
+
+The Scan operation can logically divide a table or secondary index into multiple segments, with multiple application workers scanning the segments in parallel.
+To perform a parallel scan, each worker issues its own Scan request with:
+- **Segment**: index identifier of a particular worker
+- **TotalSegments**: total number of parallel workers
+
+Because segment assignment is based solely on the partition key hash, segments can be unevenly distributed. Some segments might contain no items,
+while others might contain many partition keys with large item collections. As a result, increasing the total number of segments does not guarantee
+faster scan performance, particularly when partition keys are not uniformly distributed across the keyspace.
+
+
 ## [DynamoDB Transactions](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/transactions.html)
 
 Amazon DynamoDB transactions simplify the developer experience of making coordinated, all-or-nothing changes to multiple items both within and across tables.
