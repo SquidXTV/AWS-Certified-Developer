@@ -89,3 +89,73 @@ removing the need to share and manage SSH keys.
 
 An Amazon Machine Image (AMI) is an image that provides the software that is required to set up and boot an Amazon EC2 instance.
 You can create an AMI from your Amazon EC2 instances and then use it to launch instances with the same configuration.
+
+
+## [EC2 Auto Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
+
+Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application.
+It automatically monitors the health and availability of your instances using EC2 health checks and replaces terminated or impaired instances to maintain your desired capacity. 
+
+### [EC2 Auto Scaling Launch Templates](https://docs.aws.amazon.com/autoscaling/ec2/userguide/launch-templates.html)
+
+A launch template is similar to a launch configuration, in that it specifies instance configuration information.
+It includes the ID of the Amazon Machine Image (AMI), the instance type, a key pair, security groups, and other parameters used to launch EC2 instances.
+
+
+### [EC2 Auto Scaling Groups](https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html)
+
+An Auto Scaling group contains a collection of EC2 instances that are treated as a logical grouping for the purposes of automatic scaling and management.
+An Auto Scaling group also lets you use Amazon EC2 Auto Scaling features such as health check replacements and scaling policies.
+If an instance becomes unhealthy, the group terminates the unhealthy instance and launches another instance to replace it.
+
+The size of an Auto Scaling group depends on the number of instances that you set as the desired capacity.
+You can adjust its size to meet demand, either manually or by using automatic scaling. 
+
+You can use scaling policies to increase or decrease the number of instances in your group dynamically to meet changing conditions.
+When the scaling policy is in effect, the Auto Scaling group adjusts the desired capacity of the group,
+between the minimum and maximum capacity values that you specify, and launches or terminates the instances as needed.
+
+
+### [EC2 Auto Scaling Methods](https://docs.aws.amazon.com/autoscaling/ec2/userguide/scaling-overview.html)
+
+- Maintain a fixed number of instances
+- Scale manually by updating the desired capacity
+- Scale based on a schedule
+- Scale dynamically based on demand using CloudWatch metrics
+
+#### [Manual Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-manually.html)
+
+You can manually adjust the number of EC2 instances in your Auto Scaling group at any time using `aws autoscaling set-desired`.
+This process of changing the instance count manually is referred to as manual scaling. Manual scaling is an alternative to auto scaling,
+especially if you want to make one-time capacity changes.
+
+
+#### [Scheduled Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html)
+
+With scheduled scaling, you can set up automatic scaling for your application based on predictable load changes.
+You create scheduled actions that increase or decrease your group's desired capacity at specific times.
+
+
+#### [Dynamic Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scale-based-on-demand.html)
+
+Dynamic scaling scales the capacity of your Auto Scaling group as traffic changes occur.
+
+##### [Target Tracking Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
+
+A target tracking scaling policy automatically scales the capacity of your Auto Scaling group based on a target metric value.
+With target tracking, you select a metric and a target value to represent the ideal average utilization or throughput level for your application.
+Amazon EC2 Auto Scaling creates and manages the CloudWatch alarms that invoke scaling events when the metric deviates from the target.
+
+
+##### [Step Scaling and Simple Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
+
+Step scaling and simple scaling policies scale the capacity of your Auto Scaling group in predefined increments based on CloudWatch alarms.
+You can define separate scaling policies to handle scaling out and scaling in when an alarm threshold is breached.
+
+
+
+#### [Predictive Scaling](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)
+
+Predictive scaling works by analyzing historical load data to detect daily or weekly patterns in traffic flows.
+It uses this information to forecast future capacity needs so Amazon EC2 Auto Scaling can proactively increase
+the capacity of your Auto Scaling group to match the anticipated load.
