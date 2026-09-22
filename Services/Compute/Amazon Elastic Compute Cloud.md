@@ -159,3 +159,12 @@ You can define separate scaling policies to handle scaling out and scaling in wh
 Predictive scaling works by analyzing historical load data to detect daily or weekly patterns in traffic flows.
 It uses this information to forecast future capacity needs so Amazon EC2 Auto Scaling can proactively increase
 the capacity of your Auto Scaling group to match the anticipated load.
+
+
+
+### [EC2 Auto Scaling Cooldown Periods](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html)
+
+When you create simple scaling policies for your Auto Scaling group, we recommend that you configure the scaling cooldown at the same time.
+After your Auto Scaling group launches or terminates instances, it waits for a cooldown period to end before any further scaling activities
+initiated by simple scaling policies can start. The intention of the cooldown period is to let your Auto Scaling group stabilize and prevent
+it from launching or terminating additional instances before the effects of the previous scaling activity are visible. 
