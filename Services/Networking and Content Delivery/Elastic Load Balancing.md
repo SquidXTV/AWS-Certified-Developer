@@ -51,3 +51,14 @@ target groups based on the content of the application traffic such as headers, r
 A Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model. It can handle millions of requests per second.
 After the load balancer receives a request from a client, it selects a target from a target group in the default action.
 It attempts to send the request to the selected target using the protocol and port that you specified.
+
+
+
+## [ELB Sticky Sessions](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/edit-target-group-attributes.html#sticky-sessions)
+
+By default, an Application Load Balancer routes each request independently to a registered target based on the chosen load-balancing algorithm.
+However, you can use the sticky session feature (also known as session affinity) to enable the load balancer to bind a user's session to a specific target.
+This ensures that all requests from the user during the session are sent to the same target.
+This feature is useful for servers that maintain state information in order to provide a continuous experience to clients.
+To use sticky sessions, the client must support cookies.
+
